@@ -1,3 +1,24 @@
+Funcion dineroFaltante <- cantidadFaltante ( cantidaSolicitada, cantidadAlmacenada, billeteAlmacenado )
+	
+	cantidadTotal <- cantidaSolicitada/billeteAlmacenado
+	Si cantidadTotal >= cantidadAlmacenada Entonces
+		cantidadTotal <- cantidadTotal - cantidadAlmacenada
+		dineroFaltante <- cantidadTotal * billeteAlmacenado
+	SiNo
+		dineroFaltante <- cantidaSolicitada%billeteAlmacenado
+	Fin Si
+Fin Funcion
+
+Funcion billetesEntregados <- cantidadBilletes( cantidaSolicitada, cantidadAlmacenada, billeteAlmacenado )
+	
+	cantidadTotal <- cantidaSolicitada/billeteAlmacenado
+	Si cantidadTotal >= cantidadAlmacenada Entonces
+		billetesEntregados <- cantidadAlmacenada
+	SiNo
+		billetesEntregados <- cantidadTotal
+	Fin Si
+Fin Funcion
+
 Funcion sePuedeDispensar <- revisarDispensar ( cantidadRestante )
 	Si cantidadRestante = 0 Entonces
 		sePuedeDispensar<- Verdadero
@@ -36,6 +57,8 @@ Funcion cantidaSolicitada <- intrduccionCantidadSolicitada (	billete20, billete5
 	Leer cantidaSolicitada
 Fin Funcion
 
+
+
 Proceso DispensadoraDeBilletes
 	billete20 <- 10
 	billete50 <- 10
@@ -63,23 +86,24 @@ Proceso DispensadoraDeBilletes
 					continuar <- Verdadero
 				SiNo
 					cantidadFija <- cantidaSolicitada
-					b1000 = cantidaSolicitada/1000
-					cantidaSolicitada = cantidaSolicitada%1000
 				
-					b500= cantidaSolicitada/500
-					cantidaSolicitada = cantidaSolicitada%500
+					b1000 <- cantidadBilletes ( cantidaSolicitada, billete1000, 1000 ) 
+					cantidaSolicitada <- cantidadFaltante( cantidaSolicitada, billete1000, 1000 )
+				
+					b500 <- cantidadBilletes ( cantidaSolicitada, billete1000, 500 ) 
+					cantidaSolicitada <- cantidadFaltante( cantidaSolicitada, billete1000, 500 ) 
 					
-					b200= cantidaSolicitada/200
-					cantidaSolicitada = cantidaSolicitada%200
+					b200 <- cantidadBilletes ( cantidaSolicitada, billete1000, 200 )
+					cantidaSolicitada = cantidadFaltante( cantidaSolicitada, billete1000, 200 )
 					
-					b100 = cantidaSolicitada/100
-					cantidaSolicitada = cantidaSolicitada%100
+					b100 <- cantidadBilletes ( cantidaSolicitada, billete1000, 100 ) 
+					cantidaSolicitada = cantidadFaltante( cantidaSolicitada, billete1000, 100 ) 
 					
-					b50= cantidaSolicitada/50
-					cantidaSolicitada = cantidaSolicitada%50
+					b50 <- cantidadBilletes ( cantidaSolicitada, billete1000, 50 ) 
+					cantidaSolicitada = cantidadFaltante( cantidaSolicitada, billete1000, 50 ) 
 					
-					b20= cantidaSolicitada/20
-					cantidaSolicitada = cantidaSolicitada%20
+					b20 <- cantidadBilletes ( cantidaSolicitada, billete1000, 20 ) 
+					cantidaSolicitada = cantidadFaltante( cantidaSolicitada, billete1000, 20 ) 
 					
 					sePuedeDispensar <- revisarDispensar ( cantidaSolicitada )
 					
@@ -94,7 +118,7 @@ Proceso DispensadoraDeBilletes
 						
 						continuar <- Falso
 					SiNo
-						Escribir "Lo sentimos, no se puede dispensar la cantidad solicitada", cantidaSolicitada, " pesos en este momento."
+						Escribir "Lo sentimos, no se puede dispensar la cantidad solicitada ", cantidadFija, " pesos en este momento."
 						Escribir "Favor de ingregresar otra cantidad"
 						continuar <- Verdadero
 					Fin Si
