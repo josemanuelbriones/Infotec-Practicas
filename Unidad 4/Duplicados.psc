@@ -33,16 +33,11 @@ Fin Funcion
 
 // Proceso principal
 Proceso Duplicados
-	
-	
 	Escribir "Busqueda de numeros duplicados exactamente dos veces"
 	Definir tamanoArreglo como entero
-	
 	// Solicita al usuario el tamaño del arreglo utilizando
 	tamanoArreglo <- ConvertirANumero(ingresoValor( "Ingresa el tamano del arreglo" ))
-	
 	Dimension arregloNumeros[tamanoArreglo] // Declara el arreglo principal de números con el tamaño especificado.
-	
 	// Llena el arreglo con números ingresados por el usuario, validando cada entrada.
 	Para a<-1 hasta tamanoArreglo con paso 1 Hacer
 		arregloNumeros[a] <- ConvertirANumero(ingresoValor( "Ingresa el numero positivo"))
@@ -52,15 +47,12 @@ Proceso Duplicados
 	// Declara y inicializa el índice para controlar la cantidad de elementos en 'resultadosFinales'.
 	Definir indiceResultadosFinales Como Entero
 	indiceResultadosFinales <- 0 
-	
 	// Declara variables auxiliares para el procesamiento.
 	Definir numeroActual Como Entero
 	Definir contadorFrecuencia Como Entero
 	Definir agregado Como Logico
-	
 	// Itera a través de cada elemento del 'arregloNumeros'.
 	Para i <- 0 Hasta tamanoArreglo - 1 Con Paso 1 Hacer
-		
 		numeroActual <- arregloNumeros[i+1] // Obtiene el número actual a verificar
 		contadorFrecuencia <- 0 // Reinicia el contador de frecuencia
 		// Itera nuevamente sobre el 'arregloNumeros' para contar las ocurrencias de 'numeroActual'.
@@ -68,9 +60,7 @@ Proceso Duplicados
 			Si arregloNumeros[j+1] = numeroActual Entonces // Si encuentra una coincidencia.
 				contadorFrecuencia <- contadorFrecuencia + 1 // Incrementa el contador de frecuencia.
 			FinSi
-			
 		FinPara
-		
 		// Si el número actual aparece exactamente dos veces.
 		Si contadorFrecuencia = 2 Entonces
 			// Inicializa 'agregado' a Falso, asumiendo que el número aún no está en 'resultadosFinales'.
@@ -80,7 +70,6 @@ Proceso Duplicados
 				Si resultadosFinales[k+1] = numeroActual Entonces
 					// Si ya está, marca como 'agregado' y sale del bucle interno.
 					agregado <- Verdadero
-					
 					k <- indiceResultadosFinales 
 				FinSi
 			FinPara
